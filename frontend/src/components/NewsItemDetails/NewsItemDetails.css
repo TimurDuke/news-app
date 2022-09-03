@@ -1,3 +1,8 @@
+.news-item {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #000;
+}
+
 .news-item__header {
     display: flex;
     flex-direction: column;
