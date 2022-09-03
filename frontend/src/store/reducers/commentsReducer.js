@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const commentsReducer = (state = initialState, actions) => {
-    const commentsCopy = [...state.comments];
 
     switch(actions.type) {
         case GET_COMMENT_REQUEST:
@@ -30,15 +29,15 @@ const commentsReducer = (state = initialState, actions) => {
         case ADD_COMMENT_REQUEST:
             return {...state, loading: true, error: null};
         case ADD_COMMENT_SUCCESS:
-            commentsCopy.push(actions.comment);
-
-            return {...state, loading: false, error: null, comments: [...commentsCopy]};
+            return {...state, loading: false, error: null};
         case ADD_COMMENT_FAILURE:
             return {...state, loading: false, error: actions.error};
 
         case DELETE_COMMENT_REQUEST:
             return {...state, loading: true, error: null};
         case DELETE_COMMENT_SUCCESS:
+            const commentsCopy = [...state.comments];
+
             const deletedComment = commentsCopy.filter(news => news.id === actions.id)[0];
             const index = commentsCopy.indexOf(deletedComment);
 
