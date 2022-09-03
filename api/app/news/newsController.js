@@ -52,4 +52,11 @@ module.exports = {
             return res.status(400).send('Data not valid');
         }
     },
+    deleteNews(req, res, db) {
+        db.query('DELETE FROM news WHERE id = ?', [req.params.id], error => {
+            if (error) return res.status(400).send('Data not valid');
+
+            res.send('News deleted');
+        });
+    }
 };

@@ -18,4 +18,8 @@ router.post('/', config.upload.single('image'), (req, res) => {
     newsController.addNews(req, res, db);
 });
 
+router.delete('/:id', (req, res) => {
+    newsController.deleteNews(req, res, db);
+});
+
 module.exports = router;
