@@ -5,11 +5,14 @@ import NewsItemDetails from "../../components/NewsItemDetails/NewsItemDetails";
 import {addComment, deleteComment, getComment} from "../../store/actions/commentsActions";
 import CommentItem from "../../components/CommentItem/CommentItem";
 import Form from "../../components/Form/Form";
+import Preloader from "../../components/UI/Preloader/Preloader";
 
 const NewsDetails = props => {
     const dispatch = useDispatch();
     const news = useSelector(state => state.news.newsDetail);
-    const comments = useSelector(state => state.comments.comments)
+    const comments = useSelector(state => state.comments.comments);
+    const newsLoading = useSelector(state => state.news.loading);
+    const commentsLoading = useSelector(state => state.comments.loading);
 
     const [commentData, setCommentData] = useState({
         author: '',
@@ -39,35 +42,40 @@ const NewsDetails = props => {
         dispatch(addComment(commentData));
     };
 
-    return news && (
-        <div style={{padding: '0 15px'}}>
-            <NewsItemDetails
-                news={news}
+    return (
+        <>
+            <Preloader
+                showPreloader={newsLoading || commentsLoading}
             />
-            <div>
-                <h3 style={{fontSize: '22px', textAlign: 'center'}}>Comments</h3>
-                {!!comments.length ? comments.map(comment => (
-                    <CommentItem
-                        key={comment.id}
-                        author={comment.author}
-                        comment={comment.comment}
-                        deleteCommentHandler={() => deleteCommentHandler(comment.id)}
-                    />
-                )) : <h4 style={{textAlign: 'center'}}>This news has no comments</h4>}
-            </div>
-            <div>
-                <h3 style={{fontSize: '25px', textAlign: 'center'}}>Add comment</h3>
-                <Form
-                    onSubmitHandler={onSubmitHandler}
-                    inputData={commentData}
-                    inputsChange={inputsHandler}
-                    inputLabelFirst='author'
-                    inputLabelSecond='comment'
-                    btnTitle='Add'
-                    disabled={!commentData.comment}
+            {news && <div style={{padding: '0 15px'}}>
+                <NewsItemDetails
+                    news={news}
                 />
-            </div>
-        </div>
+                <div>
+                    <h3 style={{fontSize: '22px', textAlign: 'center'}}>Comments</h3>
+                    {!!comments.length ? comments.map(comment => (
+                        <CommentItem
+                            key={comment.id}
+                            author={comment.author}
+                            comment={comment.comment}
+                            deleteCommentHandler={() => deleteCommentHandler(comment.id)}
+                        />
+                    )) : <h4 style={{textAlign: 'center'}}>This news has no comments</h4>}
+                </div>
+                <div>
+                    <h3 style={{fontSize: '25px', textAlign: 'center'}}>Add comment</h3>
+                    <Form
+                        onSubmitHandler={onSubmitHandler}
+                        inputData={commentData}
+                        inputsChange={inputsHandler}
+                        inputLabelFirst='author'
+                        inputLabelSecond='comment'
+                        btnTitle='Add'
+                        disabled={!commentData.comment}
+                    />
+                </div>
+            </div>}
+        </>
     );
 };
 

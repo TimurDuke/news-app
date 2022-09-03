@@ -1,10 +1,13 @@
 import React, {useRef, useState} from 'react';
 import Form from "../../components/Form/Form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addNews} from "../../store/actions/newsActions";
+import Preloader from "../../components/UI/Preloader/Preloader";
 
 const AddNewsPage = ({history}) => {
     const dispatch = useDispatch();
+
+    const loading = useSelector(state => state.news.loading);
 
     const inputEl = useRef();
 
@@ -51,6 +54,9 @@ const AddNewsPage = ({history}) => {
 
     return (
         <>
+            <Preloader
+                showPreloader={loading}
+            />
             <Form
                 onSubmitHandler={onSubmitHandler}
                 inputData={state}
