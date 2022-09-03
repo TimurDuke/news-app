@@ -15,7 +15,7 @@ const Form = (props) => {
                 name={props.inputLabelFirst}
                 value={props.inputData.title}
                 onChange={(e) => props.inputsChange(e.target.name, e.target.value)}
-                required
+                required={props.inputLabelFirst === 'title'}
                 sx={{margin: '0 0 15px 0'}}
                 className='form__text-inputs'
             />

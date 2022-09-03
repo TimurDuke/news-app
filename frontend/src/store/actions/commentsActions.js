@@ -21,3 +21,25 @@ export const getComment = id => {
         }
     };
 };
+
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+
+const addCommentRequest = () => ({type: ADD_COMMENT_REQUEST});
+const addCommentSuccess = comment => ({type: ADD_COMMENT_SUCCESS, comment});
+const addCommentFailure = error => ({type: ADD_COMMENT_FAILURE, error});
+
+export const addComment = commentData => {
+    return async dispatch => {
+        try {
+            dispatch(addCommentRequest());
+            const {data} = await axiosApi.post('/comments', commentData);
+            if (data) {
+                dispatch(addCommentSuccess(data));
+            }
+        } catch (e) {
+            dispatch(addCommentFailure(e.message));
+        }
+    };
+};

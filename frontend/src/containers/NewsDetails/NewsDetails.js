@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getOneNews} from "../../store/actions/newsActions";
 import NewsItemDetails from "../../components/NewsItemDetails/NewsItemDetails";
-import {getComment} from "../../store/actions/commentsActions";
+import {addComment, getComment} from "../../store/actions/commentsActions";
 import CommentItem from "../../components/CommentItem/CommentItem";
 import Form from "../../components/Form/Form";
 
@@ -20,10 +20,15 @@ const NewsDetails = props => {
     useEffect(() => {
         dispatch(getOneNews(props.match.params.id));
         dispatch(getComment(props.match.params.id));
+
+        setCommentData({...commentData, news_id: props.match.params.id});
     }, [dispatch, props.match.params.id]);
 
-    const inputsHandler = () => {
-
+    const inputsHandler = (name, value) => {
+        setCommentData(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const deleteCommentHandler = id => {
@@ -31,7 +36,7 @@ const NewsDetails = props => {
     };
 
     const onSubmitHandler = () => {
-
+        dispatch(addComment(commentData));
     };
 
     return news && (
