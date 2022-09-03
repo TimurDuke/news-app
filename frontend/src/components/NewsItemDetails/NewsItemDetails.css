@@ -1,0 +1,24 @@
+.news-item__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.news-item__header__img {
+    width: 25%;
+    height: 25%;
+}
+
+.news-item__header__title {
+    text-align: center;
+}
+
+.news-item__date {
+    opacity: 0.6;
+    text-align: center;
+}
+
+.news-item__description {
+    letter-spacing: 1px;
+    word-spacing: 1px;
+}

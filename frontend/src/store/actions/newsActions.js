@@ -61,3 +61,25 @@ export const deleteNews = id => {
         }
     };
 };
+
+export const GET_ONE_NEWS_REQUEST = 'GET_ONE_NEWS_REQUEST';
+export const GET_ONE_NEWS_SUCCESS = 'GET_ONE_NEWS_SUCCESS';
+export const GET_ONE_NEWS_FAILURE = 'GET_ONE_NEWS_FAILURE';
+
+const getOneNewsRequest = () => ({type: GET_ONE_NEWS_REQUEST});
+const getOneNewsSuccess = news => ({type: GET_ONE_NEWS_SUCCESS, news});
+const getOneNewsFailure = error => ({type: GET_ONE_NEWS_FAILURE, error});
+
+export const getOneNews = id => {
+    return async dispatch => {
+        try {
+            dispatch(getOneNewsRequest());
+            const {data} = await axiosApi.get('/news/' + id);
+            if (data) {
+                dispatch(getOneNewsSuccess(data));
+            }
+        } catch (e) {
+            dispatch(getOneNewsFailure(e.message));
+        }
+    };
+};
