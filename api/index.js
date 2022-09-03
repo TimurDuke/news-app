@@ -3,6 +3,7 @@ const cors = require('cors');
 const config = require('./config');
 
 const news = require('./app/news/news');
+const comments = require('./app/comments/comments');
 
 const app = express();
 const PORT = 8000;
@@ -19,6 +20,7 @@ connection.connect((error) => {
     }
 
     app.use('/news', news);
+    app.use('/comments', comments);
 
     app.listen(PORT, () => {
         console.log(`Server started on ${PORT} port!`);
