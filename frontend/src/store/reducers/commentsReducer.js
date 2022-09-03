@@ -1,6 +1,10 @@
 import {
     ADD_COMMENT_FAILURE,
-    ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, DELETE_COMMENT_FAILURE, DELETE_COMMENT_REQUEST, DELETE_COMMENT_SUCCESS,
+    ADD_COMMENT_REQUEST,
+    ADD_COMMENT_SUCCESS,
+    DELETE_COMMENT_FAILURE,
+    DELETE_COMMENT_REQUEST,
+    DELETE_COMMENT_SUCCESS,
     GET_COMMENT_FAILURE,
     GET_COMMENT_REQUEST,
     GET_COMMENT_SUCCESS
@@ -19,7 +23,7 @@ const commentsReducer = (state = initialState, actions) => {
         case GET_COMMENT_REQUEST:
             return {...state, loading: true, error: null};
         case GET_COMMENT_SUCCESS:
-            return {...state, loading: false, error: null, comments: actions.comments}
+            return {...state, loading: false, error: null, comments: actions.comments};
         case GET_COMMENT_FAILURE:
             return {...state, loading: false, error: actions.error};
 

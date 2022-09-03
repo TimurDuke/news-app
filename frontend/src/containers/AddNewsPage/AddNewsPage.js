@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
-import Form from "../../components/Form/Form";
 import {useDispatch, useSelector} from "react-redux";
+import Form from "../../components/Form/Form";
 import {addNews} from "../../store/actions/newsActions";
 import Preloader from "../../components/UI/Preloader/Preloader";
 

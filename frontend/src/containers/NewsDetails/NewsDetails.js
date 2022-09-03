@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getOneNews} from "../../store/actions/newsActions";
-import NewsItemDetails from "../../components/NewsItemDetails/NewsItemDetails";
 import {addComment, deleteComment, getComment} from "../../store/actions/commentsActions";
+import NewsItemDetails from "../../components/NewsItemDetails/NewsItemDetails";
 import CommentItem from "../../components/CommentItem/CommentItem";
 import Form from "../../components/Form/Form";
 import Preloader from "../../components/UI/Preloader/Preloader";
 
 const NewsDetails = props => {
     const dispatch = useDispatch();
+
     const news = useSelector(state => state.news.newsDetail);
     const comments = useSelector(state => state.comments.comments);
     const newsLoading = useSelector(state => state.news.loading);
@@ -21,10 +22,12 @@ const NewsDetails = props => {
     });
 
     useEffect(() => {
+        setCommentData({...commentData, news_id: props.match.params.id});
+    }, [commentData, props.match.params.id]);
+
+    useEffect(() => {
         dispatch(getOneNews(props.match.params.id));
         dispatch(getComment(props.match.params.id));
-
-        setCommentData({...commentData, news_id: props.match.params.id});
     }, [dispatch, props.match.params.id]);
 
     const inputsHandler = (name, value) => {

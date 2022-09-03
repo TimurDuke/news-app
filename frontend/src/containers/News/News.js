@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteNews, getNews} from "../../store/actions/newsActions";
 import {Link} from "react-router-dom";
 import {Grid} from "@mui/material";
+import {deleteNews, getNews} from "../../store/actions/newsActions";
 import NewsItem from "../../components/NewsItem/NewsItem";
-
-import './News.css';
 import Preloader from "../../components/UI/Preloader/Preloader";
+import './News.css';
 
 const News = () => {
     const dispatch = useDispatch();
+
     const news = useSelector(state => state.news.news);
     const loading = useSelector(state => state.news.loading);
 
