@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getOneNews} from "../../store/actions/newsActions";
 import NewsItemDetails from "../../components/NewsItemDetails/NewsItemDetails";
-import {addComment, getComment} from "../../store/actions/commentsActions";
+import {addComment, deleteComment, getComment} from "../../store/actions/commentsActions";
 import CommentItem from "../../components/CommentItem/CommentItem";
 import Form from "../../components/Form/Form";
 
@@ -32,7 +32,7 @@ const NewsDetails = props => {
     };
 
     const deleteCommentHandler = id => {
-
+        dispatch(deleteComment(id));
     };
 
     const onSubmitHandler = () => {

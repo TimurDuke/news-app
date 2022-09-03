@@ -43,3 +43,23 @@ export const addComment = commentData => {
         }
     };
 };
+
+export const DELETE_COMMENT_REQUEST = 'DELETE_COMMENT_REQUEST';
+export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
+export const DELETE_COMMENT_FAILURE= 'DELETE_COMMENT_FAILURE';
+
+const deleteCommentRequest = () => ({type: DELETE_COMMENT_REQUEST});
+const deleteCommentSuccess = id => ({type: DELETE_COMMENT_SUCCESS, id});
+const deleteCommentFailure = error => ({type: DELETE_COMMENT_FAILURE, error});
+
+export const deleteComment = id => {
+    return async dispatch => {
+        try {
+            dispatch(deleteCommentRequest());
+            await axiosApi.delete('/comments/' + id);
+            await dispatch(deleteCommentSuccess(id));
+        } catch (e) {
+            dispatch(deleteCommentFailure(e.message));
+        }
+    };
+};
