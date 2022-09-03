@@ -52,4 +52,15 @@ module.exports = {
             res.status(400).send('Data not valid');
         }
     },
+    deleteComment(req, res, db) {
+        db.query('DELETE FROM comments WHERE id = ?', [req.params.id], (error, result) => {
+            if (error) return res.status(400).send('Not found');
+
+            if (result.affectedRows !== 0) {
+                res.send('Comment deleted');
+            } else {
+                res.status(400).send('There is no comment with this id.')
+            }
+        });
+    }
 };

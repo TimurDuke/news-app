@@ -14,4 +14,8 @@ router.post('/', (req, res) => {
     commnetsController.addComment(req, res, db);
 });
 
+router.delete('/:id', (req, res) => {
+    commnetsController.deleteComment(req, res, db);
+});
+
 module.exports = router;

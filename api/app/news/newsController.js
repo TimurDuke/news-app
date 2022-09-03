@@ -53,10 +53,14 @@ module.exports = {
         }
     },
     deleteNews(req, res, db) {
-        db.query('DELETE FROM news WHERE id = ?', [req.params.id], error => {
-            if (error) return res.status(400).send('Data not valid');
+        db.query('DELETE FROM news WHERE id = ?', [req.params.id], (error, result) => {
+            if (error) return res.status(400).send('Not found');
 
-            res.send('News deleted');
+            if (result.affectedRows !== 0) {
+                res.send('News deleted');
+            } else {
+                res.status(400).send('There is no news with this id.')
+            }
         });
     }
 };
