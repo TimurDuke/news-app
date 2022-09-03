@@ -28,4 +28,28 @@ module.exports = {
             res.status(404).send('There is no value with this id');
         });
     },
+    addNews(req, res, db) {
+        const newNews = {
+            title: req.body.title,
+            description: req.body.description,
+            date: new Date().toLocaleDateString('en-ca'),
+        };
+
+        if (req.file) {
+            newNews.image = req.file.filename;
+        }
+
+        if (newNews.title && newNews.description) {
+            db.query(`INSERT INTO news SET ?`, [newNews], (error, result) => {
+                if (error) {
+                    res.status(400).send(error.sqlMessage);
+                }
+
+                newNews.id = result.insertId;
+                res.send(newNews);
+            });
+        } else {
+            return res.status(400).send('Data not valid');
+        }
+    },
 };

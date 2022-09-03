@@ -14,4 +14,8 @@ router.get('/:id', (req, res) => {
     newsController.getNewsById(req, res, db);
 });
 
+router.post('/', config.upload.single('image'), (req, res) => {
+    newsController.addNews(req, res, db);
+});
+
 module.exports = router;
