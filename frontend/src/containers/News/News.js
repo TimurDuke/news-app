@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getNews} from "../../store/actions/newsActions";
+import {deleteNews, getNews} from "../../store/actions/newsActions";
 import {Link} from "react-router-dom";
 import {Grid} from "@mui/material";
 import NewsItem from "../../components/NewsItem/NewsItem";
+
+import './News.css';
 
 const News = () => {
     const dispatch = useDispatch();
@@ -14,27 +16,21 @@ const News = () => {
     }, [dispatch]);
 
     const deleteHandler = id => {
-
+        dispatch(deleteNews(id));
     };
 
     return (
-        <div style={{padding: '0 15px'}}>
-            <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center'}}>
-                <h3>Posts</h3>
+        <div className='news'>
+            <div className='news__header'>
+                <h3>News</h3>
                 <Link
                     to='/add'
-                    style={{
-                        textDecoration: 'none',
-                        color: '#000',
-                        padding: '7px 15px',
-                        border: '2px solid #000',
-                        borderRadius: '7px'
-                    }}
+                    className='news__header__link'
                 >
                     Add new post
                 </Link>
             </div>
-            <Grid item container spacing={3} sx={{justifyContent: 'center', marginTop: '0'}}>
+            <Grid item container spacing={3} className='news__content'>
                 {!!news.length ? news.map(news => (
                     <NewsItem
                         key={news.id}
@@ -44,7 +40,7 @@ const News = () => {
                         image={news.image}
                         deleteHandler={() => deleteHandler(news.id)}
                     />
-                )) : <h1 style={{margin: '30px 0 0 15px'}}>No posts</h1>}
+                )) : <h1 className='news__content__no-posts'>No posts</h1>}
             </Grid>
         </div>
     );

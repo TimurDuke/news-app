@@ -41,3 +41,23 @@ export const addNews = postData => {
         }
     };
 };
+
+export const DELETE_NEWS_REQUEST = 'DELETE_NEWS_REQUEST';
+export const DELETE_NEWS_SUCCESS = 'DELETE_NEWS_SUCCESS';
+export const DELETE_NEWS_FAILURE = 'DELETE_NEWS_FAILURE';
+
+const deleteNewsRequest = () => ({type: DELETE_NEWS_REQUEST});
+const deleteNewsSuccess = id => ({type: DELETE_NEWS_SUCCESS, id});
+const deleteNewsFailure = error => ({type: DELETE_NEWS_FAILURE, error});
+
+export const deleteNews = id => {
+    return async dispatch => {
+        try {
+            dispatch(deleteNewsRequest());
+            await axiosApi.delete('/news/' + id);
+            await dispatch(deleteNewsSuccess(id));
+        } catch (e) {
+            dispatch(deleteNewsFailure(e.message));
+        }
+    };
+};

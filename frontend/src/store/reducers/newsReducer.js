@@ -1,7 +1,7 @@
 import {
     ADD_NEWS_FAILURE,
     ADD_NEWS_REQUEST,
-    ADD_NEWS_SUCCESS,
+    ADD_NEWS_SUCCESS, DELETE_NEWS_FAILURE, DELETE_NEWS_REQUEST, DELETE_NEWS_SUCCESS,
     GET_NEWS_FAILURE,
     GET_NEWS_REQUEST,
     GET_NEWS_SUCCESS
@@ -29,6 +29,19 @@ const newsReducer = (state = initialState, actions) => {
         case ADD_NEWS_FAILURE:
             return {...state, loading: false, error: actions.error};
 
+        case DELETE_NEWS_REQUEST:
+            return {...state, loading: true, error: null};
+        case DELETE_NEWS_SUCCESS:
+            const newsCopy = [...state.news];
+
+            const deletedPost = newsCopy.filter(news => news.id === actions.id)[0];
+            const index = newsCopy.indexOf(deletedPost);
+
+            newsCopy.splice(index, 1);
+
+            return {...state, loading: false, error: null, news: [...newsCopy]};
+        case DELETE_NEWS_FAILURE:
+            return {...state, loading: false, error: actions.error};
         default:
             return state;
     }

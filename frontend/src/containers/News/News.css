@@ -1,0 +1,30 @@
+.news {
+    padding: 0 15px;
+}
+
+.news__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.news__header h3 {
+    font-size: 25px;
+}
+
+.news__header__link {
+    text-decoration: none;
+    color: #000;
+    padding: 7px 15px;
+    border: 2px solid #000;
+    border-radius: 7px;
+}
+
+.news__content {
+    justify-content: center;
+    margin-top: 0;
+}
+
+.news__content__no-news {
+    margin: 30px 0 0 15px;
+}

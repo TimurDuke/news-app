@@ -3,50 +3,26 @@ import {Link} from "react-router-dom";
 import {Button, Card, CardHeader, CardMedia, Grid} from "@mui/material";
 import {apiUrl} from "../../config";
 
+import './NewsItem.css';
+
 const NewsItem = ({title, date, image, id, deleteHandler}) => {
     return (
         <Grid item xs={12}>
-            <Card sx={{
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingRight: '15px'
-            }}
-            >
-                <div style={{display: 'flex', width: '90%'}}>
+            <Card className='card'>
+                <div className='card__content'>
                     {image && <CardMedia
                         title='image'
                         image={apiUrl + '/uploads/' + image}
-                        sx={{
-                            paddingTop: '11%',
-                            width: '12%',
-                        }}
+                        className='card__content__image-block'
                     />}
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                    }}
-                    >
+                    <div className='card__content_info-block'>
                         <CardHeader title={title}/>
-                        <span style={{padding: '15px'}}>{date}</span>
+                        <span className='card__content__info-block__date'>{date}</span>
                     </div>
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'end',
-                        marginLeft: '15px',
-                        paddingBottom: '18px'
-                    }}
-                    >
+                    <div className='card__content__info-block__read-post-block'>
                         <Link
                             to={'/news/' + id}
-                            style={{
-                                textDecoration: 'none',
-                                border: '1px solid blue',
-                                padding: '7px 15px',
-                                borderRadius: '7px'
-                            }}
+                            className='card__content__info-block__read-post-block__link'
                         >
                             Read full post >>>
                         </Link>

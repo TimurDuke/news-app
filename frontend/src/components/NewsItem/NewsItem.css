@@ -1,0 +1,41 @@
+.card {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.card__content {
+    display: flex;
+    width: 90%;
+}
+
+.card__content__image-block {
+    padding-top: 11%;
+    width: 12%;
+}
+
+.card__content_info-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card__content__info-block__date {
+    padding: 15px;
+}
+
+.card__content__info-block__read-post-block {
+    display: flex;
+    align-items: end;
+    margin-left: 15px;
+    padding-bottom: 18px;
+}
+
+.card__content__info-block__read-post-block__link {
+    text-decoration: none;
+    border: 1px solid blue;
+    padding: 7px 15px;
+    border-radius: 7px;
+}
