@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
 import AddNewsForm from "../../components/AddNewsForm/AddNewsForm";
 import {useDispatch} from "react-redux";
+import {addNews} from "../../store/actions/newsActions";
 
-const AddNewsPage = () => {
+const AddNewsPage = ({history}) => {
     const dispatch = useDispatch();
 
     const inputEl = useRef();
@@ -43,6 +44,9 @@ const AddNewsPage = () => {
         });
 
         inputEl.current.value = '';
+
+        await dispatch(addNews(formData));
+        await history.push('/');
     };
 
     return (

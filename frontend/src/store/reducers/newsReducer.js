@@ -1,4 +1,7 @@
 import {
+    ADD_NEWS_FAILURE,
+    ADD_NEWS_REQUEST,
+    ADD_NEWS_SUCCESS,
     GET_NEWS_FAILURE,
     GET_NEWS_REQUEST,
     GET_NEWS_SUCCESS
@@ -17,6 +20,13 @@ const newsReducer = (state = initialState, actions) => {
         case GET_NEWS_SUCCESS:
             return {...state, loading: false, error: null, news: actions.news};
         case GET_NEWS_FAILURE:
+            return {...state, loading: false, error: actions.error};
+
+        case ADD_NEWS_REQUEST:
+            return {...state, loading: true, error: null};
+        case ADD_NEWS_SUCCESS:
+            return {...state, loading: false, error: null};
+        case ADD_NEWS_FAILURE:
             return {...state, loading: false, error: actions.error};
 
         default:

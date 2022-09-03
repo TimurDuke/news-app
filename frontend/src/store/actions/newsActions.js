@@ -21,3 +21,23 @@ export const getNews = () => {
         }
     };
 };
+
+export const ADD_NEWS_REQUEST = 'ADD_NEWS_REQUEST';
+export const ADD_NEWS_SUCCESS = 'ADD_NEWS_SUCCESS';
+export const ADD_NEWS_FAILURE = 'ADD_NEWS_FAILURE';
+
+const addNewsRequest = () => ({type: ADD_NEWS_REQUEST});
+const addNewsSuccess = () => ({type: ADD_NEWS_SUCCESS});
+const addNewsFailure = error => ({type: ADD_NEWS_FAILURE, error});
+
+export const addNews = postData => {
+    return async dispatch => {
+        try {
+            dispatch(addNewsRequest());
+            await axiosApi.post('/news', postData);
+            await dispatch(addNewsSuccess());
+        } catch (e) {
+            dispatch(addNewsFailure(e.message));
+        }
+    };
+};
