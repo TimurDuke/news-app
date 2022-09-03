@@ -33,7 +33,7 @@ const News = () => {
                         to='/add'
                         className='news__header__link'
                     >
-                        Add new post
+                        Add new news
                     </Link>
                 </div>
                 <Grid item container spacing={3} className='news__content'>
@@ -46,7 +46,7 @@ const News = () => {
                             image={news.image}
                             deleteHandler={() => deleteHandler(news.id)}
                         />
-                    )) : <h1 className='news__content__no-posts'>No posts</h1>}
+                    )) : <h1 className='news__content__no-posts'>No news</h1>}
                 </Grid>
             </div>
         </>
