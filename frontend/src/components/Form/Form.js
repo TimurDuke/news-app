@@ -1,49 +1,45 @@
 import React from 'react';
 import {Button, TextField} from "@mui/material";
 
-import './AddNewsForm.css';
+import './Form.css';
 
-const AddNewsForm = (props) => {
+const Form = (props) => {
     return (
         <form
             onSubmit={props.onSubmitHandler}
             className='form'
         >
             <TextField
-                label='Title'
+                label={props.inputLabelFirst}
                 variant='outlined'
-                name='title'
+                name={props.inputLabelFirst}
                 value={props.inputData.title}
                 onChange={(e) => props.inputsChange(e.target.name, e.target.value)}
                 required
+                sx={{margin: '0 0 15px 0'}}
                 className='form__text-inputs'
             />
             <TextField
-                label='Description'
+                label={props.inputLabelSecond}
                 variant='outlined'
-                name='description'
+                name={props.inputLabelSecond}
                 value={props.inputData.description}
                 onChange={(e) => props.inputsChange(e.target.name, e.target.value)}
                 required
+                sx={{margin: '0 0 15px 0'}}
                 className='form__text-inputs'
             />
-            <input
-                name='image'
-                type='file'
-                ref={props.inputRef}
-                onChange={(e) => props.fileInputChange(e.target.name, e.target.files)}
-                className='form__file-input'
-            />
+            {props.children}
             <Button
                 type="submit"
                 disabled={props.disabled}
                 variant='outlined'
                 color='success'
             >
-                Save
+                {props.btnTitle}
             </Button>
         </form>
     );
 };
 
-export default AddNewsForm;
+export default Form;

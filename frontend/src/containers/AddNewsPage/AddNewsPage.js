@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import AddNewsForm from "../../components/AddNewsForm/AddNewsForm";
+import Form from "../../components/Form/Form";
 import {useDispatch} from "react-redux";
 import {addNews} from "../../store/actions/newsActions";
 
@@ -51,14 +51,30 @@ const AddNewsPage = ({history}) => {
 
     return (
         <>
-            <AddNewsForm
+            <Form
                 onSubmitHandler={onSubmitHandler}
                 inputData={state}
                 inputsChange={inputsHandler}
-                fileInputChange={fileInputHandler}
+                inputLabelFirst='title'
+                inputLabelSecond='description'
+                btnTitle='Save'
                 disabled={!(state.title !== '' && state.description !== '')}
-                inputRef={inputEl}
-            />
+            >
+                <input
+                    name='image'
+                    type='file'
+                    ref={inputEl}
+                    onChange={(e) => fileInputHandler(e.target.name, e.target.files)}
+                    style={{
+                        fontSize: '15px',
+                        border: '1px solid rgba(0, 0, 0, 0.23)',
+                        padding: '16px 20px',
+                        marginBottom: '10px',
+                        width: '50%',
+                        borderRadius: '4px'
+                    }}
+                />
+            </Form>
         </>
     );
 };
