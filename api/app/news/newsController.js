@@ -59,7 +59,7 @@ module.exports = {
             if (result.affectedRows !== 0) {
                 res.send('News deleted');
             } else {
-                res.status(400).send('There is no news with this id.')
+                res.status(400).send('There is no news with this id.');
             }
         });
     }

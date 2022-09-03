@@ -25,7 +25,7 @@ module.exports = {
             news_id: req.body.news_id,
             author: req.body.author,
             comment: req.body['comment'],
-        }
+        };
 
         if (!req.body.author) {
             newComment.author = 'Anonymous';
@@ -59,7 +59,7 @@ module.exports = {
             if (result.affectedRows !== 0) {
                 res.send('Comment deleted');
             } else {
-                res.status(400).send('There is no comment with this id.')
+                res.status(400).send('There is no comment with this id.');
             }
         });
     }
