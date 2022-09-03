@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getNews} from "../../store/actions/newsActions";
 import {Link} from "react-router-dom";
+import {Grid} from "@mui/material";
+import NewsItem from "../../components/NewsItem/NewsItem";
 
 const News = () => {
     const dispatch = useDispatch();
@@ -10,6 +12,10 @@ const News = () => {
     useEffect(() => {
         dispatch(getNews());
     }, [dispatch]);
+
+    const deleteHandler = id => {
+
+    };
 
     return (
         <div style={{padding: '0 15px'}}>
@@ -28,6 +34,18 @@ const News = () => {
                     Add new post
                 </Link>
             </div>
+            <Grid item container spacing={3} sx={{justifyContent: 'center', marginTop: '0'}}>
+                {!!news.length ? news.map(news => (
+                    <NewsItem
+                        key={news.id}
+                        id={news.id}
+                        title={news.title}
+                        date={news.date}
+                        image={news.image}
+                        deleteHandler={() => deleteHandler(news.id)}
+                    />
+                )) : <h1 style={{margin: '30px 0 0 15px'}}>No posts</h1>}
+            </Grid>
         </div>
     );
 };
