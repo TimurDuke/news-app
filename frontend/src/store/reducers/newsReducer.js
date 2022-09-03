@@ -1,3 +1,9 @@
+import {
+    GET_NEWS_FAILURE,
+    GET_NEWS_REQUEST,
+    GET_NEWS_SUCCESS
+} from "../actions/newsActions";
+
 const initialState = {
     news: [],
     loading: false,
@@ -6,6 +12,13 @@ const initialState = {
 
 const newsReducer = (state = initialState, actions) => {
     switch(actions.type) {
+        case GET_NEWS_REQUEST:
+            return {...state, loading: true, error: null};
+        case GET_NEWS_SUCCESS:
+            return {...state, loading: false, error: null, news: actions.news};
+        case GET_NEWS_FAILURE:
+            return {...state, loading: false, error: actions.error};
+
         default:
             return state;
     }
